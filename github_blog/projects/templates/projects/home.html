@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% load static %}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Project Wiki - Homepage</title>
+    <link rel="stylesheet" href="{% static 'projects/css/style.css' %}">
+</head>
+<body>
+
+<!-- Hero Section -->
+<section id="hero">
+    <div class="hero-content">
+        <h1>Welcome to Project Wiki</h1>
+        <p>Your source for synchronized GitHub project wikis and tasks</p>
+        <a href="#latest-news" class="hero-button">Explore</a>
+    </div>
+</section>
+
+<!-- Latest News Section 
+<section id="latest-news" class="section">
+    <h2>Latest Project Updates</h2>
+    <div class="news-grid">
+        {% for page in wiki_pages %}
+            <div class="news-item">
+                <h3>{{ page.title }}</h3>
+                <p>{{ page.content|truncatewords:20 }}</p>
+            </div>
+        {% endfor %}
+    </div>
+</section>-->
+
+<section id="latest-news" class="section">
+    <h2>Latest Project Updates</h2>
+    <div class="news-grid">
+        {% for page in wiki_pages %}
+            <div class="news-item">
+                <h3>{{ page.title }}</h3>
+                <p>{{ page.content|truncatewords:20 }}</p>
+            </div>
+        {% endfor %}
+    </div>
+</section>
+
+
+<!-- Footer -->
+<footer id="footer">
+    <p>&copy; 2024 Project Wiki. All rights reserved.</p>
+</footer>
+
+</body>
+</html>
