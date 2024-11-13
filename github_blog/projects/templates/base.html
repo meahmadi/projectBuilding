@@ -1,0 +1,44 @@
+<!-- templates/base.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% load static %}
+    {% load socialaccount %}
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}ساختمان حل مساله{% endblock %}</title>
+    <link rel="stylesheet" href="{% static 'projects/css/style.css' %}">
+</head>
+<body>
+
+<!-- Navigation Bar -->
+<header>
+    <div class="navbar">
+        <h1><a href="/">ساختمان حل مساله</a></h1>
+
+        <nav>
+            <ul>
+                <li><a href="{% url 'home' %}">صفحه اصلی</a></li>
+                {% if user.is_authenticated %}
+                    <li><a href="{% url 'account_logout' %}">Logout</a></li>
+                {% else %}
+                    <li><a href="{% provider_login_url 'github' %}">Login with GitHub</a></li>
+                {% endif %}
+            </ul>
+        </nav>
+
+    </div>
+</header>
+
+<main>
+    {% block content %}{% endblock %}
+</main>
+
+<!-- Footer -->
+<footer id="footer">
+    <p>&copy; ۱۴۰۳ جهان‌واره آینده‌گردی. ساختمان حل مساله.</p>
+</footer>
+
+</body>
+</html>

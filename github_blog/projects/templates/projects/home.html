@@ -1,53 +1,81 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    {% load static %}
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Project Wiki - Homepage</title>
-    <link rel="stylesheet" href="{% static 'projects/css/style.css' %}">
-</head>
-<body>
+{% extends "base.html" %}
+
+{% block title %}Login | Project Building{% endblock %}
+
+{% block content %}
+<script>
+    let lastExpanded = null;  // Store the last expanded item
+
+    function toggleNewsItem(itemId) {
+        const content = document.getElementById(`content-${itemId}`);
+        const summary = document.getElementById(`summary-${itemId}`);
+
+        // If there's a previously expanded item, collapse it
+        if (lastExpanded && lastExpanded !== itemId) {
+            document.getElementById(`content-${lastExpanded}`).style.display = 'none';
+            document.getElementById(`summary-${lastExpanded}`).style.display = 'block';
+        }
+
+        // Toggle the current item
+        if (content.style.display === 'none') {
+            content.style.display = 'block';
+            summary.style.display = 'none';
+            lastExpanded = itemId;  // Update the last expanded item
+        } else {
+            content.style.display = 'none';
+            summary.style.display = 'block';
+            lastExpanded = null;  // Reset the last expanded item
+        }
+    }
+
+</script>
+
 
 <!-- Hero Section -->
 <section id="hero">
     <div class="hero-content">
-        <h1>Welcome to Project Wiki</h1>
-        <p>Your source for synchronized GitHub project wikis and tasks</p>
-        <a href="#latest-news" class="hero-button">Explore</a>
+        <h1>به ساختمان حل مسائل خوش‌آمدید</h1>
+        <p>مکانی برای هم‌فکری، مرور، هم‌افزایی و بسیج عمومی حل مسائل پروژه ها</p>
+        <a href="#latest-news" class="hero-button">مرور آخرین اخبار</a>
     </div>
 </section>
 
-<!-- Latest News Section 
 <section id="latest-news" class="section">
-    <h2>Latest Project Updates</h2>
+    <h2>آخرین اخبار</h2>
     <div class="news-grid">
+        
         {% for page in wiki_pages %}
-            <div class="news-item">
-                <h3>{{ page.title }}</h3>
-                <p>{{ page.content|truncatewords:20 }}</p>
+        <div class="news-item" id="news-item-{{ forloop.counter }}" onclick="toggleNewsItem({{ forloop.counter }})">
+            <h2 class="news-title">{{ page.title }}</h2>
+            <div class="news-summary" id="summary-{{ forloop.counter }}">
+                {{ page.content|safe|truncatewords:20 }}
             </div>
-        {% endfor %}
-    </div>
-</section>-->
-
-<section id="latest-news" class="section">
-    <h2>Latest Project Updates</h2>
-    <div class="news-grid">
-        {% for page in wiki_pages %}
-            <div class="news-item">
-                <h3>{{ page.title }}</h3>
-                <p>{{ page.content|truncatewords:20 }}</p>
+            <div class="news-content" id="content-{{ forloop.counter }}" style="display: none;">
+                {{ page.content|safe }}
             </div>
+        </div>
         {% endfor %}
     </div>
 </section>
 
+<section id="issues_table" class="section">
+<h2>ساختمان مسائل پروژه به حسب سطوح</h2>
+<div class="card-container">
+    {% for level, level_content in issues_by_difficulty.items %}
+        <div class="difficulty-section">
+            <h3> {{ level_content.title }}</h3>
+            <div class="card-row">
+                {% for issue in level_content.issues %}
+                    <div class="issue-card">
+                        <h4>{{ issue.title }}</h4>
+                        <p>{{ issue.body|safe|truncatewords:40 }}</p>
+                        <a href="{{ issue.url }}" target="_blank" class="btn">View Issue</a>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+    {% endfor %}
+</div>
+</section>
 
-<!-- Footer -->
-<footer id="footer">
-    <p>&copy; 2024 Project Wiki. All rights reserved.</p>
-</footer>
-
-</body>
-</html>
+{% endblock %}

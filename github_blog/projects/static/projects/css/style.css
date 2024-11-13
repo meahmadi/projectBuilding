@@ -112,4 +112,266 @@ body {
     .section h2 {
         font-size: 2rem;
     }
+    .styled-table th, .styled-table td {
+        padding: 10px;
+    }
+}
+
+
+/* Navbar */
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    padding: 1rem 2rem;
+    background-color: #1c2541;
+}
+
+.navbar h1 {
+    color: #e0e1dd;
+}
+
+.navbar nav ul {
+    list-style-type: none;
+    display: flex;
+    gap: 1rem;
+}
+
+.navbar nav a {
+    color: #e0e1dd;
+    text-decoration: none;
+}
+
+/* Login Section */
+#login {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 80vh;
+    background-image: url('/static/projects/images/space-bg.jpg');
+    background-size: cover;
+    background-position: center;
+}
+
+.login-container {
+    background-color: rgba(12, 22, 30, 0.85);
+    padding: 2rem;
+    border-radius: 8px;
+    text-align: center;
+    width: 300px;
+}
+
+.login-container h2 {
+    margin-bottom: 1rem;
+}
+
+.login-btn {
+    padding: 0.5rem 2rem;
+    color: #ffffff;
+    background-color: #3a506b;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.login-btn:hover {
+    background-color: #5bc0be;
+}
+
+/* GitHub Login Button Styles */
+.github-login-btn {
+    display: inline-block;
+    background-color: #24292f;
+    color: white;
+    font-weight: bold;
+    padding: 10px 20px;
+    border-radius: 5px;
+    text-decoration: none;
+    margin-top: 1rem;
+    font-size: 1.1rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+}
+
+.github-login-btn:hover {
+    background-color: #3e4a59;
+}
+
+.github-login-btn img {
+    width: 24px; /* Adjust the logo size */
+    height: 24px;
+}
+
+.news-item {
+    margin-bottom: 20px;
+    cursor: pointer;
+}
+
+.news-summary {
+    font-size: 16px;
+    color: #555;
+}
+
+.news-content {
+    display: none;
+    padding-top: 10px;
+    color: #333;
+    font-size: 14px;
+    line-height: 1.5;
+    transition: max-height 0.5s ease-out, padding 0.5s ease-out;
+    overflow: hidden;
+}
+
+.news-item h2 {
+    font-size: 18px;
+    font-weight: bold;
+    color: #333;
+}
+
+.news-item:hover {
+    background-color: #f5f5f5;
+    transition: background-color 0.3s ease;
+}
+
+/* Table container for responsive layout */
+.table-container {
+    overflow-x: auto;
+    margin: 20px 0;
+}
+
+/* Styled table */
+.styled-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-family: Arial, sans-serif;
+}
+
+.styled-table thead tr {
+    background-color: #333;
+    color: #fff;
+    text-align: left;
+    font-weight: bold;
+}
+
+.styled-table th, .styled-table td {
+    padding: 12px 15px;
+    border: 1px solid #ddd;
+}
+
+.styled-table tbody tr {
+    background-color: #f9f9f9;
+}
+
+.styled-table tbody tr:nth-child(even) {
+    background-color: #e9e9e9;
+}
+
+.styled-table tbody tr:hover {
+    background-color: #d0d0d0;
+}
+
+.styled-table .difficulty-header {
+    cursor: pointer;
+    background-color: #666;
+    color: white;
+    font-weight: bold;
+    text-align: center;
+}
+
+.styled-table a {
+    color: #007bff;
+    text-decoration: none;
+}
+
+.styled-table a:hover {
+    text-decoration: underline;
+}
+
+/* Container for all cards */
+.card-container {
+    margin: 20px 0;
+}
+
+/* Section for each difficulty level */
+.difficulty-section {
+    margin-bottom: 30px;
+}
+
+.difficulty-section h3 {
+    background-color: #333;
+    color: #fff;
+    padding: 10px;
+    margin-bottom: 15px;
+    border-radius: 5px;
+    font-size: 1.2em;
+}
+
+/* Row layout for cards */
+.card-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
+}
+
+/* Individual issue card */
+.issue-card {
+    background-color: #f9f9f9;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+    padding: 15px;
+    width: calc(33.333% - 10px);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    transition: transform 0.2s ease-in-out;
+}
+
+.issue-card h4 {
+    color: #333;
+    font-size: 1.1em;
+    margin-bottom: 10px;
+}
+
+.issue-card p {
+    color: #666;
+    font-size: 0.9em;
+    margin-bottom: 15px;
+    line-height: 1.4em;
+}
+
+/* Button styling */
+.btn {
+    align-self: start;
+    padding: 8px 12px;
+    background-color: #007bff;
+    color: white;
+    text-decoration: none;
+    border-radius: 5px;
+    font-weight: bold;
+    text-align: center;
+    transition: background-color 0.2s;
+}
+
+.btn:hover {
+    background-color: #0056b3;
+}
+
+/* Hover effect for cards */
+.issue-card:hover {
+    transform: scale(1.03);
+}
+
+/* Responsive adjustments */
+@media (max-width: 1024px) {
+    .issue-card {
+        width: calc(50% - 10px);
+    }
+}
+
+@media (max-width: 768px) {
+    .issue-card {
+        width: 100%;
+    }
 }
