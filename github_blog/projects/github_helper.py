@@ -4,9 +4,9 @@ from django.conf import settings
 
 from bs4 import BeautifulSoup
 
-def get_wiki_page_list(repo_name):
+def get_wiki_page_list(repo):
     # URL to the wiki's home page
-    url = f"https://github.com/{repo_name}/wiki"
+    url = f"https://github.com/{repo.name}/wiki"
     
     response = requests.get(url)
     if response.status_code == 200:
@@ -16,7 +16,7 @@ def get_wiki_page_list(repo_name):
         # Find all wiki page links (adjust selector if GitHub’s structure changes)
         for link in soup.select('a'):
             link_text = link.get('href')
-            if link_text.startswith(f"/{repo_name}/wiki"):
+            if link_text.startswith(f"/{repo.name}/wiki"):
                 wiki_page_names = link_text.split('/')
                 if len(wiki_page_names)>4 and len(wiki_page_names[4])>0:
                     page_name = wiki_page_names[4]
@@ -28,10 +28,10 @@ def get_wiki_page_list(repo_name):
         print("Failed to retrieve wiki page list:", response.status_code)
         return []
 
-def fetch_wiki_page(repo_name, page_name):
+def fetch_wiki_page(repo, page_name):
     # Construct the URL to the raw wiki page file
-    url = f"https://raw.githubusercontent.com/wiki/{repo_name}/{page_name}.md"
-    headers = {'Authorization': f'{settings.GITHUB_TOKEN}'}
+    url = f"https://raw.githubusercontent.com/wiki/{repo.name}/{page_name}.md"
+    headers = {'Authorization': repo.token}
     try:
         response = requests.get(url, headers=headers)
         # print(response)    
@@ -49,9 +49,9 @@ def fetch_wiki_page(repo_name, page_name):
     return None  # Return None if there was an issue
 
 
-def get_selected_issues(repo_name):
-    url = f"https://api.github.com/repos/{repo_name}/issues"
-    headers = {'Authorization': f'token {settings.GITHUB_TOKEN}'}
+def get_selected_issues(repo):
+    url = f"https://api.github.com/repos/{repo.name}/issues"
+    headers = {'Authorization': repo.token}
 
     response = requests.get(url, headers=headers)
     if response.status_code == 200:

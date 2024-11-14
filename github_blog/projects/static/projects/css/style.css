@@ -3,7 +3,10 @@
     box-sizing: border-box;
     margin: 0;
     padding: 0;
-    font-family: Arial, sans-serif;
+    font-family: "Noto Naskh Arabic", serif;
+    font-optical-sizing: auto;
+    font-weight: 550;
+    font-style: normal;
 }
 
 html {
@@ -374,4 +377,47 @@ body {
     .issue-card {
         width: 100%;
     }
+}
+
+.issue-cards-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+
+.issue-card {
+    width: 25%; /* Smaller initial size */
+    padding: 15px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    transition: all 0.3s ease;
+    cursor: pointer;
+    overflow: hidden;
+}
+
+.issue-card h3 {
+    font-size: 16px;
+    margin: 0;
+}
+
+.issue-summary {
+    font-size: 14px;
+}
+
+.issue-details {
+    display: none; /* Hidden by default */
+    margin-top: 10px;
+}
+
+.issue-card.expanded {
+    width: 100%; /* Full width when expanded */
+    display: block;
+    background: #f9f9f9;
+}
+
+.issue-card.expanded .issue-details {
+    display: block; /* Show details when expanded */
+}
+.issue-card.expanded .issue-summary {
+    display: none; /* Show details when expanded */
 }

@@ -1,6 +1,6 @@
 {% extends "base.html" %}
 
-{% block title %}Login | Project Building{% endblock %}
+{% block title %}ساختمان پروژه‌ها{% endblock %}
 
 {% block content %}
 <script>
@@ -27,6 +27,21 @@
             lastExpanded = null;  // Reset the last expanded item
         }
     }
+
+    function expandCard(card) {
+        // Collapse any already expanded cards
+        doNext = true;
+        document.querySelectorAll('.issue-card.expanded').forEach(function(expandedCard) {
+            expandedCard.classList.remove('expanded');
+            if (expandedCard == card) 
+                doNext = false;
+        });
+
+        // Toggle expansion for the clicked card
+        if(doNext)
+            card.classList.toggle('expanded');
+    }
+
 
 </script>
 
@@ -58,6 +73,7 @@
     </div>
 </section>
 
+
 <section id="issues_table" class="section">
 <h2>ساختمان مسائل پروژه به حسب سطوح</h2>
 <div class="card-container">
@@ -66,9 +82,16 @@
             <h3> {{ level_content.title }}</h3>
             <div class="card-row">
                 {% for issue in level_content.issues %}
-                    <div class="issue-card">
+                    <div class="issue-card" onclick="expandCard(this)">
                         <h4>{{ issue.title }}</h4>
-                        <p>{{ issue.body|safe|truncatewords:40 }}</p>
+                        <div class="issue-summary">
+                            <p>{{ issue.body|safe|truncatewords:40 }}</p>
+                        </div>
+                        <div class="issue-details">
+                            <p>موضوعات: {{ issue.labels }}</p>
+                            <p>تاریخ: {{ issue.date_created }}</p>
+                            <p>توضیحات {{ issue.body|safe}}</p>
+                        </div>
                         <a href="{{ issue.url }}" target="_blank" class="btn">View Issue</a>
                     </div>
                 {% endfor %}
@@ -76,6 +99,16 @@
         </div>
     {% endfor %}
 </div>
+</section>
+
+<section id="projects_table" class="section">
+    <h2>پروژه‌ها</h2>
+{% for repository in projects %}
+    <div class="repository-card">
+        <h3>{{ repository.name }}</h3>
+        <!-- Add more repository details, issues, or wiki links -->
+    </div>
+{% endfor %}
 </section>
 
 {% endblock %}
